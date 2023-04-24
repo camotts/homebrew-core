@@ -17,11 +17,8 @@ class Zrok < Formula
       system "npm", "install", *Language::Node.local_npm_install_args
       system "npm", "run", "build"
     end
-    ldflags = %W[
-      -s -w
-      -X github.com/openziti/zrok/build.Version=#{version}
-      -X github.com/openziti/zrok/build.Hash=#{Utils.git_head}
-    ]
+    ldflags = ["-X github.com/openziti/zrok/build.Version=#{version}",
+               "-X github.com/openziti/zrok/build.Hash=#{Utils.git_head}"]
     system "go", "build", *std_go_args(ldflags: ldflags), "./cmd/zrok"
   end
 
